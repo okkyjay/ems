@@ -3,6 +3,7 @@
 namespace App\EMS\Employee;
 
 use App\EMS\Complaint\Complaint;
+use App\EMS\Notification\Notification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -106,5 +107,10 @@ class Employee extends Authenticatable implements HasMedia
     public function complaints()
     {
         return $this->hasMany(Complaint::class, 'employee_id');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'employee_id', 'id');
     }
 }

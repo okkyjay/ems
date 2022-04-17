@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Holiday extends Model
 {
 
+    public $table = 'holidays';
+
     /**
      * The attributes that are mass assignable.
      *

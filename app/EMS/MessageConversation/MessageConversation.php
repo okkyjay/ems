@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class MessageConversation extends Model
 {
 
+    public $table = 'message_conversations';
+
     /**
      * The attributes that are mass assignable.
      *

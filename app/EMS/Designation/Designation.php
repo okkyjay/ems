@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Designation extends Model
 {
 
+    public $table = 'designations';
+
     /**
      * The attributes that are mass assignable.
      *

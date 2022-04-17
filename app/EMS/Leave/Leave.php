@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Leave extends Model
 {
 
+    public $table = 'leaves';
     /**
      * The attributes that are mass assignable.
      *
