@@ -90,4 +90,9 @@ class ComplaintRepository extends BaseRepository implements ComplaintRepositoryI
     {
         return $this->all($columns, $orderBy, $sortBy);
     }
+
+    public function listEmployeeComplaints(array $query, $columns = array('*'), string $orderBy = 'id', string $sortBy = 'asc'):Collection
+    {
+        return $this->where($query, $columns, $orderBy, $sortBy);
+    }
 }

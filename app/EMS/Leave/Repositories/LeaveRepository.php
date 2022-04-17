@@ -90,4 +90,9 @@ class LeaveRepository extends BaseRepository implements LeaveRepositoryInterface
     {
         return $this->all($columns, $orderBy, $sortBy);
     }
+
+    public function listEmployeeLeaves(array $query, $columns = array('*'), string $orderBy = 'id', string $sortBy = 'asc'):Collection
+    {
+        return $this->where($query, $columns, $orderBy, $sortBy);
+    }
 }

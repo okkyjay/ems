@@ -4,10 +4,11 @@
 namespace App\EMS\Complaint\Repositories;
 
 
+use App\EMS\BaseRepositoryInterface;
 use App\EMS\Complaint\Complaint;
 use Illuminate\Support\Collection;
 
-interface ComplaintRepositoryInterface
+interface ComplaintRepositoryInterface extends BaseRepositoryInterface
 {
     public function createComplaint(array $data): Complaint;
 
@@ -18,4 +19,7 @@ interface ComplaintRepositoryInterface
     public function deleteComplaint() : bool;
 
     public function listComplaints($columns = array('*'), string $orderBy = 'id', string $sortBy = 'asc') : Collection;
+
+    public function listEmployeeComplaints(array $query, $columns = array('*'), string $orderBy = 'id', string $sortBy = 'asc') : Collection;
+
 }

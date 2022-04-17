@@ -4,7 +4,6 @@ namespace App\EMS\Employee;
 
 use App\EMS\Complaint\Complaint;
 use App\EMS\Notification\Notification;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;

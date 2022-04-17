@@ -63,11 +63,7 @@ class TodoRepository extends BaseRepository implements TodoRepositoryInterface
      */
     public function updateTodo(array $data) : bool
     {
-        try {
-            return $this->update($data);
-        } catch (QueryException $e) {
-            throw new TodoException($e);
-        }
+        return $this->update($data);
     }
 
     /**
@@ -76,7 +72,9 @@ class TodoRepository extends BaseRepository implements TodoRepositoryInterface
      */
     public function deleteTodo() : bool
     {
-        return $this->delete();
+        try {
+            return $this->delete();
+        } catch (TodoException $exception){}
     }
 
     /**
@@ -89,5 +87,10 @@ class TodoRepository extends BaseRepository implements TodoRepositoryInterface
     public function listTodos($columns = array('*'), string $orderBy = 'id', string $sortBy = 'asc') : Collection
     {
         return $this->all($columns, $orderBy, $sortBy);
+    }
+
+    public function listEmployeeTodos(array $query, $columns = array('*'), string $orderBy = 'id', string $sortBy = 'asc'):Collection
+    {
+        return $this->where($query, $columns, $orderBy, $sortBy);
     }
 }

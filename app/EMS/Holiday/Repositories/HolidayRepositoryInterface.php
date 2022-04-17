@@ -4,10 +4,11 @@
 namespace App\EMS\Holiday\Repositories;
 
 
+use App\EMS\BaseRepositoryInterface;
 use App\EMS\Holiday\Holiday;
 use Illuminate\Support\Collection;
 
-interface HolidayRepositoryInterface
+interface HolidayRepositoryInterface extends BaseRepositoryInterface
 {
     public function createHoliday(array $data): Holiday;
 
