@@ -4,9 +4,11 @@ namespace App\EMS\Department;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Department extends Model
 {
+    use SoftDeletes;
 
     public $table = 'departments';
     /**
@@ -17,6 +19,11 @@ class Department extends Model
     protected $fillable = [
         'name',
         'status',
+    ];
+
+    public const STATUS_CONSTANT = [
+        '1' => 'Enabled',
+        '2' => 'Disabled',
     ];
 
     protected $dates = [

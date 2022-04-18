@@ -29,13 +29,13 @@ class HolidayController extends EmployeeBaseController
             $query = ['employee_id' => $loggedInEmployee->id];
             $list = $this->holidayRepo->listHolidays();
 
-            if ($request->has('search')){
+            if ($request->has('search') && $request->input('search')){
                 $search = $request->input('search');
                 $list = $list->where("name", "LIKE", "%".$search."%");
             }
 
             $data = [
-                'holidays' => $this->holidayRepo->paginateArrayResults($list),
+                'holidays' => $this->holidayRepo->paginateArrayResults($list->all()),
                 'page' => $page
             ];
             return $this->success($data);

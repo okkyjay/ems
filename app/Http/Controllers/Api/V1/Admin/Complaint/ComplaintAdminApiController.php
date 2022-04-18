@@ -38,17 +38,19 @@ class ComplaintAdminApiController extends AdminBaseController
 
             if ($request->has('search') && $request->input('search')){
                 $search = $request->input('search');
-                $list = $list->where("email", "LIKE", "%".$search."%");
+                $list = $list->where("title", "LIKE", "%".$search."%");
             }
 
             $data = [
                 'complaint' => $this->complaintRepo->paginateArrayResults($list->all(), $per_page, $page),
                 'page' => $page
             ];
+
             return $this->success($data);
 
         }catch (\Exception $exception){
-            return $this->failed("Unknown Failure ".$exception->getMessage());
+            logger($exception);
+            return $this->failed("Unknown Failure ");
         }
     }
 
@@ -70,6 +72,7 @@ class ComplaintAdminApiController extends AdminBaseController
                 return $this->notFound('Not Found');
             }
         }catch (\Exception $exception){
+            logger($exception);
             return $this->failed("Unknown Failure");
         }
     }
@@ -77,15 +80,12 @@ class ComplaintAdminApiController extends AdminBaseController
     public function store(CreateComplaintRequest $request)
     {
         try {
-            $request->merge([
-                'status' => 1,
-                'password' => bcrypt($request->input('password'))
-            ]);
-            $complaint = $this->complaintRepo->createComplaint($request->all());
+            $complaint = $this->complaintRepo->createComplaint($request->except('attachment'));
             $data = ['complaint' =>  $complaint = $this->complaintRepo->findComplaintById($complaint->id)];
             return $this->success($data);
         } catch (\Exception $exception){
-            return $this->failed("Unknown Failure".$exception->getMessage());
+            logger($exception);
+            return $this->failed("Unknown Failure");
         }
     }
 
@@ -97,8 +97,9 @@ class ComplaintAdminApiController extends AdminBaseController
 
                 $complaintUpdate = new ComplaintRepository($complaint);
                 try {
-                    $complaintUpdate->updateComplaint($request->all());
+                    $complaintUpdate->updateComplaint($request->except('attachment'));
                 } catch (ComplaintException $e) {
+                    logger($e);
                     return $this->failed("Record Updating Failed");
                 }
                 $data = [
@@ -109,6 +110,7 @@ class ComplaintAdminApiController extends AdminBaseController
                 return $this->notFound('Forbidden');
             }
         }catch (\Exception $exception){
+            logger($exception);
             return $this->failed("Unknown Failure");
         }
     }
@@ -125,6 +127,7 @@ class ComplaintAdminApiController extends AdminBaseController
                 return $this->notFound("Record Not Found");
             }
         }catch (\Exception $exception){
+            logger($exception);
             return $this->failed("Unknown Failure");
         }
     }

@@ -48,7 +48,8 @@ class EmployeeAdminApiController extends AdminBaseController
             return $this->success($data);
 
         }catch (\Exception $exception){
-            return $this->failed("Unknown Failure ".$exception->getMessage());
+            logger($exception);
+            return $this->failed("Unknown Failure ");
         }
     }
 
@@ -70,6 +71,7 @@ class EmployeeAdminApiController extends AdminBaseController
                 return $this->notFound('Not Found');
             }
         }catch (\Exception $exception){
+            logger($exception);
             return $this->failed("Unknown Failure");
         }
     }
@@ -85,7 +87,8 @@ class EmployeeAdminApiController extends AdminBaseController
             $data = ['employee' =>  $employee = $this->employeeRepo->findEmployeeById($employee->id)];
             return $this->success($data);
         } catch (\Exception $exception){
-            return $this->failed("Unknown Failure".$exception->getMessage());
+            logger($exception);
+            return $this->failed("Unknown Failure");
         }
     }
 
@@ -99,6 +102,7 @@ class EmployeeAdminApiController extends AdminBaseController
                 try {
                     $employeeUpdate->updateEmployee($request->all());
                 } catch (EmployeeException $e) {
+                    logger($e);
                     return $this->failed("Record Updating Failed");
                 }
                 $data = [
@@ -109,6 +113,7 @@ class EmployeeAdminApiController extends AdminBaseController
                 return $this->notFound('Forbidden');
             }
         }catch (\Exception $exception){
+            logger($exception);
             return $this->failed("Unknown Failure");
         }
     }
@@ -125,6 +130,7 @@ class EmployeeAdminApiController extends AdminBaseController
                 return $this->notFound("Record Not Found");
             }
         }catch (\Exception $exception){
+            logger($exception);
             return $this->failed("Unknown Failure");
         }
     }

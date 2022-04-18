@@ -20,7 +20,6 @@ class PermissionRepository extends BaseRepository implements PermissionRepositor
      */
     public function __construct(Permission $permission)
     {
-        parent::__construct($permission);
         $this->model = $permission;
     }
 
@@ -45,10 +44,10 @@ class PermissionRepository extends BaseRepository implements PermissionRepositor
      * @return Permission
      * @throws PermissionException
      */
-    public function findPermissionById(int $id) : Permission
+    public function findPermissionById(int $id)
     {
         try {
-            return $this->findOneOrFail($id);
+            return $this->find($id);
         } catch (ModelNotFoundException $e) {
             throw new PermissionException($e);
         }

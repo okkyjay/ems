@@ -20,7 +20,6 @@ class UpdatePayrollRequest extends BaseFormRequest
             'net_salary' => ['required'],
             'month' => ['required'],
             'year' => ['required'],
-            'status' => ['required'],
         ];
     }
 }

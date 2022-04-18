@@ -4,10 +4,11 @@
 namespace App\EMS\LeaveType\Repositories;
 
 
+use App\EMS\BaseRepositoryInterface;
 use App\EMS\LeaveType\LeaveType;
 use Illuminate\Support\Collection;
 
-interface LeaveTypeRepositoryInterface
+interface LeaveTypeRepositoryInterface extends BaseRepositoryInterface
 {
     public function createLeaveType(array $data): LeaveType;
 

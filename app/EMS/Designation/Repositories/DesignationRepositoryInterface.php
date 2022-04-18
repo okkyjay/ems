@@ -4,10 +4,11 @@
 namespace App\EMS\Designation\Repositories;
 
 
+use App\EMS\BaseRepositoryInterface;
 use App\EMS\Designation\Designation;
 use Illuminate\Support\Collection;
 
-interface DesignationRepositoryInterface
+interface DesignationRepositoryInterface extends BaseRepositoryInterface
 {
     public function createDesignation(array $data): Designation;
 

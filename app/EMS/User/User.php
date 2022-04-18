@@ -2,6 +2,7 @@
 
 namespace App\EMS\User;
 
+use App\EMS\Role\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,6 +23,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
+        'status'
+    ];
+
+    public const STATUS_CONSTANT = [
+        '1' => 'Enabled',
+        '2' => 'Disabled',
     ];
 
     /**
@@ -49,4 +57,8 @@ class User extends Authenticatable
         'updated_at',
         'deleted_at',
     ];
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

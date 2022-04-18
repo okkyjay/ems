@@ -29,13 +29,13 @@ class ComplaintController extends EmployeeBaseController
             $query = ['employee_id' => $loggedInEmployee->id];
             $list = $this->complaintRepo->listEmployeeComplaints($query);
 
-            if ($request->has('search')){
+            if ($request->has('search') && $request->input('search')){
                 $search = $request->input('search');
-                $list = $list->where("name", "LIKE", "%".$search."%");
+                $list = $list->where("title", "LIKE", "%".$search."%");
             }
 
             $data = [
-                'complaints' => $this->complaintRepo->paginateArrayResults($list),
+                'complaints' => $this->complaintRepo->paginateArrayResults($list->all()),
                 'page' => $page
             ];
             return $this->success($data);
@@ -51,6 +51,9 @@ class ComplaintController extends EmployeeBaseController
             $loggedInEmployee = $this->user();
             if ((int)$loggedInEmployee->id === (int)$request->input('employee_id')){
                 $complaint = $this->complaintRepo->createComplaint($request->all());
+                if ($request->input('attachment')){
+                    $this->storeMediaFiles($complaint, $request->input('attachment'), 'attachment');
+                }
                 $data = ['complaint' => $complaint];
                 return $this->success($data);
             }else{
@@ -90,7 +93,10 @@ class ComplaintController extends EmployeeBaseController
 
                 $complaintUpdate = new ComplaintRepository($complaint);
                 try {
-                    $complaintUpdate->updateComplaint($request->all());
+                    $complaintUpdate->updateComplaint($request->except('attachment'));
+                    if ($request->input('attachment')){
+                        $this->updateMediaFiles($complaint, $request->input('attachment'), 'attachment');
+                    }
                 } catch (ComplaintException $e) {
                 }
                 $data = [];

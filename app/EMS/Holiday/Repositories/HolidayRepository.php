@@ -20,7 +20,6 @@ class HolidayRepository extends BaseRepository implements HolidayRepositoryInter
      */
     public function __construct(Holiday $holiday)
     {
-        parent::__construct($holiday);
         $this->model = $holiday;
     }
 

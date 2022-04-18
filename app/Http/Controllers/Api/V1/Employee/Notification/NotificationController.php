@@ -28,13 +28,13 @@ class NotificationController extends EmployeeBaseController
             $query = ['employee_id' => $loggedInEmployee->id];
             $list = $this->notificationRepo->listEmployeeNotifications($query);
 
-            if ($request->has('search')){
+            if ($request->has('search') && $request->input('search')){
                 $search = $request->input('search');
                 $list = $list->where("name", "LIKE", "%".$search."%");
             }
 
             $data = [
-                'notifications' => $this->notificationRepo->paginateArrayResults($list),
+                'notifications' => $this->notificationRepo->paginateArrayResults($list->all()),
                 'page' => $page
             ];
             return $this->success($data);
@@ -66,6 +66,7 @@ class NotificationController extends EmployeeBaseController
         }
     }
 
+
     public function update(UpdateNotificationRequest $request, int $id)
     {
         try {
@@ -86,6 +87,7 @@ class NotificationController extends EmployeeBaseController
             return $this->failed("Unknown Failure");
         }
     }
+
 
     public function destroy(int $id)
     {

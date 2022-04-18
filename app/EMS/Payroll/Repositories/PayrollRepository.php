@@ -20,7 +20,6 @@ class PayrollRepository extends BaseRepository implements PayrollRepositoryInter
      */
     public function __construct(Payroll $payroll)
     {
-        parent::__construct($payroll);
         $this->model = $payroll;
     }
 
@@ -45,10 +44,10 @@ class PayrollRepository extends BaseRepository implements PayrollRepositoryInter
      * @return Payroll
      * @throws PayrollException
      */
-    public function findPayrollById(int $id) : Payroll
+    public function findPayrollById(int $id)
     {
         try {
-            return $this->findOneOrFail($id);
+            return $this->find($id);
         } catch (ModelNotFoundException $e) {
             throw new PayrollException($e);
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\EMS\Role\Requests;
+namespace App\EMS\Permission\Requests;
 
 
 use App\EMS\BaseFormRequest;

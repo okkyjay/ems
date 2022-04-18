@@ -4,10 +4,11 @@
 namespace App\EMS\User\Repositories;
 
 
+use App\EMS\BaseRepositoryInterface;
 use App\EMS\User\User;
 use Illuminate\Support\Collection;
 
-interface UserRepositoryInterface
+interface UserRepositoryInterface extends BaseRepositoryInterface
 {
     public function createUser(array $data): User;
 

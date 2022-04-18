@@ -15,6 +15,13 @@ class UpdateRoleRequest extends BaseFormRequest
     {
         return [
             'title' => ['required'],
+            'permissions.*' => [
+                'integer',
+            ],
+            'permissions' => [
+                'required',
+                'array',
+            ],
         ];
     }
 }

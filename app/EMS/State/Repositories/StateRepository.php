@@ -20,7 +20,6 @@ class StateRepository extends BaseRepository implements StateRepositoryInterface
      */
     public function __construct(State $state)
     {
-        parent::__construct($state);
         $this->model = $state;
     }
 

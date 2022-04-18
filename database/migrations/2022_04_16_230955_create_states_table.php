@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('name')->nullable();
             $table->string('short_code')->nullable();
-            $table->string('status')->nullable();
+            $table->string('status')->nullable()->default(1);
             $table->foreignId("country_id")
                 ->nullable()
                 ->references('id')

@@ -4,14 +4,15 @@
 namespace App\EMS\Permission\Repositories;
 
 
+use App\EMS\BaseRepositoryInterface;
 use App\EMS\Permission\Permission;
 use Illuminate\Support\Collection;
 
-interface PermissionRepositoryInterface
+interface PermissionRepositoryInterface extends BaseRepositoryInterface
 {
     public function createPermission(array $data): Permission;
 
-    public function findPermissionById(int $id) : Permission;
+    public function findPermissionById(int $id) ;
 
     public function updatePermission(array $data) : bool;
 

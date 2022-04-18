@@ -20,7 +20,6 @@ class TodoRepository extends BaseRepository implements TodoRepositoryInterface
      */
     public function __construct(Todo $todo)
     {
-        parent::__construct($todo);
         $this->model = $todo;
     }
 

@@ -20,7 +20,6 @@ class DepartmentRepository extends BaseRepository implements DepartmentRepositor
      */
     public function __construct(Department $department)
     {
-        parent::__construct($department);
         $this->model = $department;
     }
 

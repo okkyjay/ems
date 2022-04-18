@@ -4,10 +4,11 @@
 namespace App\EMS\Department\Repositories;
 
 
+use App\EMS\BaseRepositoryInterface;
 use App\EMS\Department\Department;
 use Illuminate\Support\Collection;
 
-interface DepartmentRepositoryInterface
+interface DepartmentRepositoryInterface extends BaseRepositoryInterface
 {
     public function createDepartment(array $data): Department;
 

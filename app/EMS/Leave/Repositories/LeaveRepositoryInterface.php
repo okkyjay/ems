@@ -12,7 +12,7 @@ interface LeaveRepositoryInterface extends BaseRepositoryInterface
 {
     public function createLeave(array $data): Leave;
 
-    public function findLeaveById(int $id) : Leave;
+    public function findLeaveById(int $id) ;
 
     public function updateLeave(array $data) : bool;
 

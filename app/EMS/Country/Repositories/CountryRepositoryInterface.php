@@ -4,10 +4,11 @@
 namespace App\EMS\Country\Repositories;
 
 
+use App\EMS\BaseRepositoryInterface;
 use App\EMS\Country\Country;
 use Illuminate\Support\Collection;
 
-interface CountryRepositoryInterface
+interface CountryRepositoryInterface extends BaseRepositoryInterface
 {
     public function createCountry(array $data): Country;
 

@@ -16,12 +16,11 @@ class NotificationRepository extends BaseRepository implements NotificationRepos
     /**
      * NotificationRepository constructor.
      *
-     * @param Notification $state
+     * @param Notification $notificaton
      */
-    public function __construct(Notification $state)
+    public function __construct(Notification $notification)
     {
-        parent::__construct($state);
-        $this->model = $state;
+        $this->model = $notification;
     }
 
     /**
@@ -45,10 +44,10 @@ class NotificationRepository extends BaseRepository implements NotificationRepos
      * @return Notification
      * @throws NotificationException
      */
-    public function findNotificationById(int $id) : Notification
+    public function findNotificationById(int $id)
     {
         try {
-            return $this->findOneOrFail($id);
+            return $this->find($id);
         } catch (ModelNotFoundException $e) {
             throw new NotificationException($e);
         }
@@ -89,5 +88,18 @@ class NotificationRepository extends BaseRepository implements NotificationRepos
     public function listNotifications($columns = array('*'), string $orderBy = 'id', string $sortBy = 'asc') : Collection
     {
         return $this->all($columns, $orderBy, $sortBy);
+    }
+
+    /**
+     * @param array $columns
+     * @param string $orderBy
+     * @param string $sortBy
+     * @param array $query
+     *
+     * @return Collection
+     */
+    public function listEmployeeNotifications(array $query, $columns = array('*'), string $orderBy = 'id', string $sortBy = 'asc') : Collection
+    {
+        return $this->where($query, $columns, $orderBy, $sortBy);
     }
 }

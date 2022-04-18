@@ -20,7 +20,6 @@ class DesignationRepository extends BaseRepository implements DesignationReposit
      */
     public function __construct(Designation $designation)
     {
-        parent::__construct($designation);
         $this->model = $designation;
     }
 

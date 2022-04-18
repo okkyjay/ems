@@ -23,9 +23,12 @@ class Payroll extends Model implements HasMedia
      * @var array<int, string>
      */
     protected $fillable = [
-        'title',
-        'description',
+        'basic_salary',
+        'tax_deduction',
         'employee_id',
+        'net_salary',
+        'month',
+        'year',
         'status',
     ];
 

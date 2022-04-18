@@ -4,9 +4,11 @@ namespace App\EMS\Message;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Message extends Model
 {
+    use SoftDeletes;
 
     public $table = 'messages';
     /**
@@ -17,6 +19,7 @@ class Message extends Model
     protected $fillable = [
         'employee_one_id',
         'employee_two_id',
+        'time'
     ];
 
     protected $dates = [

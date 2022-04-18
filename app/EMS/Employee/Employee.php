@@ -4,7 +4,10 @@ namespace App\EMS\Employee;
 
 use App\EMS\Complaint\Complaint;
 use App\EMS\Notification\Notification;
+use App\EMS\Payroll\Payroll;
+use App\EMS\Todo\Todo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -16,6 +19,7 @@ class Employee extends Authenticatable implements HasMedia
 {
     use HasApiTokens, HasFactory, Notifiable;
     use InteractsWithMedia;
+    use SoftDeletes;
 
     public $table = 'employees';
 
@@ -51,6 +55,12 @@ class Employee extends Authenticatable implements HasMedia
         'status',
         'date_of_birth',
         'date_hired',
+    ];
+
+    public const STATUS_CONSTANT = [
+        '1' => 'Active',
+        '2' => 'Resigned',
+        '3' => 'Sacked',
     ];
 
     /**
@@ -109,6 +119,16 @@ class Employee extends Authenticatable implements HasMedia
     public function complaints()
     {
         return $this->hasMany(Complaint::class, 'employee_id');
+    }
+
+    public function todos()
+    {
+        return $this->hasMany(Todo::class, 'employee_id');
+    }
+
+    public function payrolls()
+    {
+        return $this->hasMany(Payroll::class, 'employee_id');
     }
 
     public function employeeNotifications()

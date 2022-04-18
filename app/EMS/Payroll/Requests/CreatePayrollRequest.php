@@ -15,11 +15,12 @@ class CreatePayrollRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'leave_from' => ['required'],
-            'leave_to' => ['required'],
-            'employee_remark' => ['required'],
-            'leave_type_id' => ['required'],
             'employee_id' => ['required'],
+            'basic_salary' => ['required'],
+            'tax_deduction' => ['required'],
+            'net_salary' => ['required'],
+            'month' => ['required'],
+            'year' => ['required'],
         ];
     }
 }

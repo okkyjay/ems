@@ -29,13 +29,13 @@ class LeaveController extends EmployeeBaseController
             $query = ['employee_id' => $loggedInEmployee->id];
             $list = $this->leaveRepo->listEmployeeLeaves($query);
 
-            if ($request->has('search')){
+            if ($request->has('search') && $request->input('search')){
                 $search = $request->input('search');
                 $list = $list->where("name", "LIKE", "%".$search."%");
             }
 
             $data = [
-                'leaves' => $this->leaveRepo->paginateArrayResults($list),
+                'leaves' => $this->leaveRepo->paginateArrayResults($list->all()),
                 'page' => $page
             ];
             return $this->success($data);
@@ -51,6 +51,9 @@ class LeaveController extends EmployeeBaseController
             $loggedInEmployee = $this->user();
             if ((int)$loggedInEmployee->id === (int)$request->input('employee_id')){
                 $leave = $this->leaveRepo->createLeave($request->all());
+                if ($request->input('attachment')){
+                    $this->storeMediaFiles($leave, $request->input('attachment'), 'attachment');
+                }
                 $data = ['leave' => $leave];
                 return $this->success($data);
             }else{
@@ -91,6 +94,9 @@ class LeaveController extends EmployeeBaseController
                 $leaveUpdate = new LeaveRepository($leave);
                 try {
                     $leaveUpdate->updateLeave($request->all());
+                    if ($request->input('attachment')){
+                        $this->storeMediaFiles($leave, $request->input('attachment'), 'attachment');
+                    }
                 } catch (LeaveException $e) {
                 }
                 $data = [];

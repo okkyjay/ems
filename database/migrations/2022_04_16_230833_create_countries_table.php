@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->string('short_code')->nullable();
-            $table->string('status')->default(0);
+            $table->string('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -24,6 +24,8 @@ use App\EMS\Message\Repositories\MessageRepository;
 use App\EMS\Message\Repositories\MessageRepositoryInterface;
 use App\EMS\Notification\Repositories\NotificationRepository;
 use App\EMS\Notification\Repositories\NotificationRepositoryInterface;
+use App\EMS\Payroll\Repositories\PayrollRepository;
+use App\EMS\Payroll\Repositories\PayrollRepositoryInterface;
 use App\EMS\Permission\Repositories\PermissionRepository;
 use App\EMS\Permission\Repositories\PermissionRepositoryInterface;
 use App\EMS\Role\Repositories\RoleRepository;
@@ -55,5 +57,6 @@ class RepositoryServiceProvider extends ServiceProvider{
         $this->app->bind(NotificationRepositoryInterface::class, NotificationRepository::class);
         $this->app->bind(MessageRepositoryInterface::class, MessageRepository::class);
         $this->app->bind(EmployeeRepositoryInterface::class, EmployeeRepository::class);
+        $this->app->bind(PayrollRepositoryInterface::class, PayrollRepository::class);
     }
 }

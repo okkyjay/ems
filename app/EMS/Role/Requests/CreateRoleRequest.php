@@ -16,6 +16,13 @@ class CreateRoleRequest extends BaseFormRequest
     {
         return [
             'title' => ['required'],
+            'permissions.*' => [
+                'integer',
+            ],
+            'permissions' => [
+                'required',
+                'array',
+            ],
         ];
     }
 }

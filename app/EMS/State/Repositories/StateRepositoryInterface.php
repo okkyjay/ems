@@ -4,10 +4,11 @@
 namespace App\EMS\State\Repositories;
 
 
+use App\EMS\BaseRepositoryInterface;
 use App\EMS\State\State;
 use Illuminate\Support\Collection;
 
-interface StateRepositoryInterface
+interface StateRepositoryInterface extends BaseRepositoryInterface
 {
     public function createState(array $data): State;
 

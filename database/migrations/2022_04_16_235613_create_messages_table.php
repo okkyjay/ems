@@ -27,6 +27,7 @@ return new class extends Migration
                 ->on("employees")
                 ->onDelete("restrict")
                 ->onUpdate("restrict");
+            $table->string("time");
             $table->timestamps();
             $table->softDeletes();
         });

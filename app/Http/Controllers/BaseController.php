@@ -17,7 +17,7 @@ class BaseController extends Controller
             'data' => $data
         ];
 
-        return response()->json($response, 424);
+        return response()->json($response, 400);
     }
 
     public function notFound($message, array $data = []): JsonResponse
@@ -54,5 +54,28 @@ class BaseController extends Controller
         ];
 
         return response()->json($response);
+    }
+
+    public function storeMediaFiles($model, $filename, $keyName)
+    {
+        if ($model && $filename && $keyName){
+            $model->addMedia(storage_path('tmp/uploads/' . basename($filename)))->toMediaCollection($keyName);
+        }
+    }
+
+    public function updateMediaFiles($model, $filename, $keyName)
+    {
+        if ($model && $filename && $keyName){
+            if ($filename) {
+                if (!$model->$keyName || $filename !== $model->$keyName->file_name) {
+                    if ($model->$keyName) {
+                        $model->$keyName->delete();
+                    }
+                    $model->addMedia(storage_path('tmp/uploads/' . basename($filename)))->toMediaCollection($keyName);
+                }
+            } elseif ($model->$keyName) {
+                $model->$keyName->delete();
+            }
+        }
     }
 }

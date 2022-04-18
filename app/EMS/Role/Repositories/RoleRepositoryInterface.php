@@ -4,10 +4,11 @@
 namespace App\EMS\Role\Repositories;
 
 
+use App\EMS\BaseRepositoryInterface;
 use App\EMS\Role\Role;
 use Illuminate\Support\Collection;
 
-interface RoleRepositoryInterface
+interface RoleRepositoryInterface extends BaseRepositoryInterface
 {
     public function createRole(array $data): Role;
 

@@ -32,13 +32,13 @@ class TodoController extends EmployeeBaseController
             $query = ['employee_id' => $loggedInEmployee->id];
             $list = $this->todoRepo->listEmployeeTodos($query);
 
-            if ($request->has('search')){
+            if ($request->has('search') && $request->input('search')){
                 $search = $request->input('search');
-                $list = $list->where("name", "LIKE", "%".$search."%");
+                $list = $list->where("title", "LIKE", "%".$search."%");
             }
 
             $data = [
-                'todos' => $this->todoRepo->paginateArrayResults($list),
+                'todos' => $this->todoRepo->paginateArrayResults($list->all()),
                 'page' => $page
             ];
             return $this->success($data);

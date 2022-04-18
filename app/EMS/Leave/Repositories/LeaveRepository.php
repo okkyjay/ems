@@ -10,6 +10,7 @@ use App\EMS\Leave\Leave;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
+use Mockery\Matcher\Any;
 
 class LeaveRepository extends BaseRepository implements LeaveRepositoryInterface
 {
@@ -20,7 +21,6 @@ class LeaveRepository extends BaseRepository implements LeaveRepositoryInterface
      */
     public function __construct(Leave $leave)
     {
-        parent::__construct($leave);
         $this->model = $leave;
     }
 
@@ -45,10 +45,10 @@ class LeaveRepository extends BaseRepository implements LeaveRepositoryInterface
      * @return Leave
      * @throws LeaveException
      */
-    public function findLeaveById(int $id) : Leave
+    public function findLeaveById(int $id)
     {
         try {
-            return $this->findOneOrFail($id);
+            return $this->find($id);
         } catch (ModelNotFoundException $e) {
             throw new LeaveException($e);
         }

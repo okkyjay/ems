@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string("net_salary");
             $table->string("month");
             $table->string("year");
-            $table->string("status");
+            $table->string("status")->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

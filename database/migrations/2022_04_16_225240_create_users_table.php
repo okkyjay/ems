@@ -24,6 +24,7 @@ return new class extends Migration
                 ->on("roles")
                 ->onDelete("restrict")
                 ->onUpdate("restrict");
+            $table->string("status")->default(1);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

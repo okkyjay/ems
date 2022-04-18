@@ -15,9 +15,9 @@ class CreateNotificationRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
-            'country_id' => ['required'],
-            'status' => ['required'],
+            'title' => ['required'],
+            'body' => ['required'],
+            'employee_id' => ['required'],
         ];
     }
 }

@@ -20,7 +20,6 @@ class LeaveTypeRepository extends BaseRepository implements LeaveTypeRepositoryI
      */
     public function __construct(LeaveType $leaveType)
     {
-        parent::__construct($leaveType);
         $this->model = $leaveType;
     }
 

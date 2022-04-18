@@ -12,7 +12,7 @@ interface PayrollRepositoryInterface extends BaseRepositoryInterface
 {
     public function createPayroll(array $data): Payroll;
 
-    public function findPayrollById(int $id) : Payroll;
+    public function findPayrollById(int $id) ;
 
     public function updatePayroll(array $data) : bool;
 
