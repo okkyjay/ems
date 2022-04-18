@@ -75,6 +75,12 @@ Route::group(['prefix' => 'v1/ems', 'as' => 'api.'], function () {
             Route::apiResource("payrolls", App\Http\Controllers\Api\V1\Employee\Payroll\PayrollController::class);
             Route::apiResource("leaves", App\Http\Controllers\Api\V1\Employee\Leave\LeaveController::class);
             Route::apiResource("holidays", App\Http\Controllers\Api\V1\Employee\Holiday\HolidayController::class);
+
+            Route::get("messages", [App\Http\Controllers\Api\V1\Employee\Message\MessageController::class, 'index']);
+            Route::get("message-conversations", [App\Http\Controllers\Api\V1\Employee\Message\MessageController::class, 'conversations']);
+
+            Route::post("messages", [App\Http\Controllers\Api\V1\Employee\Message\MessageController::class, 'newMessage']);
+            Route::post("message-conversations", [App\Http\Controllers\Api\V1\Employee\Message\MessageController::class, 'newConversation']);
         });
     });
 });
