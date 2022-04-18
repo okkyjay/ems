@@ -4,10 +4,11 @@
 namespace App\EMS\Employee\Repositories;
 
 
+use App\EMS\BaseRepositoryInterface;
 use App\EMS\Employee\Employee;
 use Illuminate\Support\Collection;
 
-interface EmployeeRepositoryInterface
+interface EmployeeRepositoryInterface extends BaseRepositoryInterface
 {
     public function createEmployee(array $data): Employee;
 

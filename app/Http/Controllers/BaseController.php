@@ -32,6 +32,18 @@ class BaseController extends Controller
         return response()->json($response, 404);
     }
 
+    public function forbidden($message = "Forbidden", array $data = []): JsonResponse
+    {
+        $response = [
+            'status' => false,
+            'code' => 403,
+            'message' => $message,
+            'data' => $data
+        ];
+
+        return response()->json($response, 403);
+    }
+
     public function success($data, $message = "success"): JsonResponse
     {
         $response = [

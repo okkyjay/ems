@@ -110,6 +110,7 @@ class LeaveController extends EmployeeBaseController
             if ($leave && $leave->employee_id == $this->user()->id) {
                 $leaveDelete = new LeaveRepository($leave);
                 $leaveDelete->deleteLeave();
+                return $this->success([]);
             }else{
                 return $this->notFound("Forbidden");
             }

@@ -20,7 +20,6 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
      */
     public function __construct(Employee $user)
     {
-        parent::__construct($user);
         $this->model = $user;
     }
 

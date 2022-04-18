@@ -12,6 +12,8 @@ use App\EMS\Department\Repositories\DepartmentRepository;
 use App\EMS\Department\Repositories\DepartmentRepositoryInterface;
 use App\EMS\Designation\Repositories\DesignationRepository;
 use App\EMS\Designation\Repositories\DesignationRepositoryInterface;
+use App\EMS\Employee\Repositories\EmployeeRepository;
+use App\EMS\Employee\Repositories\EmployeeRepositoryInterface;
 use App\EMS\Holiday\Repositories\HolidayRepository;
 use App\EMS\Holiday\Repositories\HolidayRepositoryInterface;
 use App\EMS\Leave\Repositories\LeaveRepository;
@@ -52,5 +54,6 @@ class RepositoryServiceProvider extends ServiceProvider{
         $this->app->bind(TodoRepositoryInterface::class, TodoRepository::class);
         $this->app->bind(NotificationRepositoryInterface::class, NotificationRepository::class);
         $this->app->bind(MessageRepositoryInterface::class, MessageRepository::class);
+        $this->app->bind(EmployeeRepositoryInterface::class, EmployeeRepository::class);
     }
 }

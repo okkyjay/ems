@@ -32,9 +32,11 @@ class AuthController extends AdminBaseController
                     'token' => $token
                 ];
                 return $this->success($data);
+            }else{
+                return $this->notFound("user record not found");
             }
         }catch (\Exception $exception){
-
+            return $this->failed("Unknown Failure");
         }
     }
 

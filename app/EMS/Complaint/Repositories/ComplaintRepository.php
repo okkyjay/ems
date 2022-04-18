@@ -20,7 +20,6 @@ class ComplaintRepository extends BaseRepository implements ComplaintRepositoryI
      */
     public function __construct(Complaint $complaint)
     {
-        parent::__construct($complaint);
         $this->model = $complaint;
     }
 

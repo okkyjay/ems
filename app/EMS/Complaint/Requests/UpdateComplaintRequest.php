@@ -14,10 +14,8 @@ class UpdateComplaintRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'leave_from' => ['required'],
-            'leave_to' => ['required'],
-            'employee_remark' => ['required'],
-            'leave_type_id' => ['required'],
+            'title' => ['required'],
+            'description' => ['required'],
             'employee_id' => ['required'],
         ];
     }

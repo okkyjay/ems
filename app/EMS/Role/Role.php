@@ -2,7 +2,7 @@
 
 namespace App\EMS\Role;
 
-
+use App\EMS\Permission\Permission;
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
@@ -22,4 +22,9 @@ class Role extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
 }

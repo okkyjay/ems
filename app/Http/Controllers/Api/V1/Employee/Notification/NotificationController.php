@@ -94,6 +94,7 @@ class NotificationController extends EmployeeBaseController
             if ($notification && $notification->employee_id == $this->user()->id) {
                 $notificationDelete = new NotificationRepository($notification);
                 $notificationDelete->deleteNotification();
+                return $this->success([]);
             }else{
                 return $this->notFound("Forbidden");
             }

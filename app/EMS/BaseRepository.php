@@ -5,7 +5,9 @@ namespace App\EMS;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class BaseRepository implements BaseRepositoryInterface
 {
@@ -77,5 +79,60 @@ class BaseRepository implements BaseRepositoryInterface
     public function delete() : bool
     {
         return $this->model->delete();
+    }
+
+    /**
+     * @param string $id
+     * @return mixed
+     */
+    public function find($id)
+    {
+        return $this->model->find($id);
+    }
+
+    /**
+     * @param  $id
+     * @return mixed
+     * @throws ModelNotFoundException
+     */
+    public function findOneOrFail($id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
+    /**
+     * @param array $data
+     * @return Collection
+     */
+    public function findBy(array $data)
+    {
+        return $this->model->where($data)->get();
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function findOneBy(array $data)
+    {
+        return $this->model->where($data)->first();
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     * @throws ModelNotFoundException
+     */
+    public function findOneByOrFail(array $data)
+    {
+        return $this->model->where($data)->firstOrFail();
+    }
+    /**
+     * @param array $attributes
+     * @return mixed
+     */
+    public function create(array $attributes)
+    {
+        return $this->model->create($attributes);
     }
 }

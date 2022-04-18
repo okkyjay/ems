@@ -113,6 +113,7 @@ class TodoController extends EmployeeBaseController
             if ($todo && $todo->employee_id == $this->user()->id) {
                 $todoDelete = new TodoRepository($todo);
                 $todoDelete->deleteTodo();
+                return $this->success([]);
             }else{
                 return $this->notFound("Forbidden");
             }

@@ -33,7 +33,7 @@ class Employee extends Authenticatable implements HasMedia
     protected $fillable = [
         'first_name',
         'last_name',
-        'email' => ['required','unique:users'],
+        'email',
         'password',
         'phone_number',
         'employee_number',
@@ -44,11 +44,13 @@ class Employee extends Authenticatable implements HasMedia
         'bank_account_number',
         'bank_account_name',
         'department_id',
+        'designation_id',
         'bank_id',
         'state_id',
         'country_id',
         'status',
-        'date_of_birth' => ["required"]
+        'date_of_birth',
+        'date_hired',
     ];
 
     /**
@@ -58,7 +60,7 @@ class Employee extends Authenticatable implements HasMedia
      */
     protected $hidden = [
         'password',
-        'remember_token',
+        'access_code',
     ];
 
     /**
@@ -75,6 +77,7 @@ class Employee extends Authenticatable implements HasMedia
         'created_at',
         'updated_at',
         'deleted_at',
+        'date_hired'
     ];
 
     protected $appends = [
@@ -108,7 +111,7 @@ class Employee extends Authenticatable implements HasMedia
         return $this->hasMany(Complaint::class, 'employee_id');
     }
 
-    public function notifications()
+    public function employeeNotifications()
     {
         return $this->hasMany(Notification::class, 'employee_id', 'id');
     }

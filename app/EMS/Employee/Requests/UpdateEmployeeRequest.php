@@ -16,22 +16,8 @@ class UpdateEmployeeRequest extends BaseFormRequest
         return [
             'first_name' => ['required'],
             'last_name' => ['required'],
-            'email' => ['required','unique:users'],
-            'password' => ['required'],
-            'phone_number' => ['required'],
+            'email' => ['required','unique:users,email'],
             'employee_number' => ['required'],
-            'gender' => ['required'],
-            'address' => ['required'],
-            'basic_salary' => ['required'],
-            'access_code' => ['required'],
-            'bank_account_number' => ['required'],
-            'bank_account_name' => ['required'],
-            'department_id' => ['required'],
-            'bank_id' => ['required'],
-            'state_id' => ['required'],
-            'country_id' => ['required'],
-            'status' => ['required'],
-            'date_of_birth' => ["required"]
         ];
     }
 }
