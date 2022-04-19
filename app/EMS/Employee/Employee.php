@@ -3,6 +3,7 @@
 namespace App\EMS\Employee;
 
 use App\EMS\Complaint\Complaint;
+use App\EMS\Leave\Leave;
 use App\EMS\Notification\Notification;
 use App\EMS\Payroll\Payroll;
 use App\EMS\Todo\Todo;
@@ -129,6 +130,11 @@ class Employee extends Authenticatable implements HasMedia
     public function payrolls()
     {
         return $this->hasMany(Payroll::class, 'employee_id');
+    }
+
+    public function leaves()
+    {
+        return $this->hasMany(Leave::class, 'employee_id');
     }
 
     public function employeeNotifications()

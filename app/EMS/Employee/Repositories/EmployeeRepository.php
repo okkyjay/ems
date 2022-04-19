@@ -89,4 +89,34 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
     {
         return $this->all($columns, $orderBy, $sortBy);
     }
+
+    /**
+     * Return all the Payrolls associated with the Employee
+     *
+     * @return mixed
+     */
+    public function findPayrolls() : Collection
+    {
+        return $this->model->payrolls;
+    }
+
+    /**
+     * Return all the Complain associated with the Employee
+     *
+     * @return mixed
+     */
+    public function findComplaints() : Collection
+    {
+        return $this->model->complaints;
+    }
+
+    /**
+     * Return all the leaves associated with the Employee
+     *
+     * @return mixed
+     */
+    public function findLeaves() : Collection
+    {
+        return $this->model->leaves;
+    }
 }

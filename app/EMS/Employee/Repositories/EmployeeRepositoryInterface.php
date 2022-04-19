@@ -19,4 +19,6 @@ interface EmployeeRepositoryInterface extends BaseRepositoryInterface
     public function deleteEmployee() : bool;
 
     public function listEmployees($columns = array('*'), string $orderBy = 'id', string $sortBy = 'asc') : Collection;
+
+    public function findPayrolls() : Collection;
 }

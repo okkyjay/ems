@@ -54,7 +54,7 @@ class MessageConversation extends Model implements HasMedia
         return $this->belongsTo(Employee::class, 'chat_employee_id');
     }
 
-    public function message()
+    public function messageBody()
     {
         return $this->belongsTo(Message::class, 'message_id');
     }

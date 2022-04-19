@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Api\V1\Employee\Message;
 
 
+use App\EMS\Employee\Employee;
 use App\EMS\Message\Message;
 use App\EMS\MessageConversation\MessageConversation;
 use App\Http\Controllers\Api\V1\Employee\EmployeeBaseController;
@@ -22,10 +23,16 @@ class MessageController extends EmployeeBaseController
             $employee = $this->user();
             $messages = Message::query()
                 ->where('employee_one_id', $employee->id)
-                ->orWhere('employee_two_id', $employee->id)
-                ->limit($limit)->offset($offset)->orderByDesc('updated_at')->get();
+                ->orWhere('employee_two_id', $employee->id);
 
-            return $this->success(['messages' => $messages]);
+            $total = $messages->count();
+
+            if ($total > 0){
+                $messages = $messages->limit($limit)->offset($offset)->orderByDesc('updated_at')->get();
+                return $this->success(['messages' => $messages, 'total' => $total]);
+            }else{
+                return $this->success(['messages' => 0, 'total' => 0]);
+            }
         }catch (\Exception $exception){
             return $this->failed("Unknown Failure");
         }
@@ -33,15 +40,22 @@ class MessageController extends EmployeeBaseController
 
     public function newMessage(Request $request)
     {
+        $request->validate([
+            'employee_one_id' => 'required',
+            'employee_two_id' => 'required'
+        ]);
         try {
-            $request->validate([
-                'employee_one_id' => 'required',
-                'employee_two_id' => 'required'
-            ]);
 
             $employeeOneId = $request->input('employee_one_id');
             $employeeTwoId = $request->input('employee_two_id');
 
+            if ($employeeOneId === $employeeTwoId){
+                return $this->failed("You can't message your self");
+            }
+            $employees = Employee::query()->whereIn('id', [$employeeTwoId, $employeeOneId])->get();
+            if (count($employees) < 2){
+                return $this->failed("Employee you want to chat with does not exist");
+            }
             $ChattedOne = Message::query()->where('employee_one_id', $employeeOneId)->where('employee_two_id', $employeeTwoId)->first();
             $ChattedTwo = Message::query()->where('employee_one_id', $employeeTwoId)->where('employee_two_id', $employeeOneId)->first();
 
@@ -53,7 +67,7 @@ class MessageController extends EmployeeBaseController
                     'employee_one_id' => $employeeOneId,
                     'employee_two_id' => $employeeTwoId
                 ]);
-                $this->success(['message' => $message]);
+                return $this->success(['message' => $message]);
             }
         }catch (\Exception $exception){
             return $this->failed("Unknown Failure");
@@ -62,11 +76,11 @@ class MessageController extends EmployeeBaseController
 
     public function conversations(Request $request)
     {
-        try {
+        $request->validate([
+            'message_id' => 'required'
+        ]);
 
-            $request->validate([
-                'message_id' => 'required'
-            ]);
+        try {
 
             $limit = $request->input('limit', 10);
             $offset = $request->input('offset', 0);
@@ -74,7 +88,7 @@ class MessageController extends EmployeeBaseController
             $messageId = $request->input('message_id');
 
             $conversations = MessageConversation::query()->with([
-                'message', 'sender'
+                'messageBody', 'sender'
             ])->where('message_id', $messageId);
             $total = $conversations->count()??0;
             if ($total > 0){
@@ -127,7 +141,7 @@ class MessageController extends EmployeeBaseController
                     $this->storeMediaFiles($conversation, $attachment, 'attachment');
                 }
                 return $this->success([
-                    'conversation' => $conversation->load('sender','message')
+                    'conversation' => $conversation->load('sender','messageBody')
                 ]);
             }
         }catch (\Exception $exception){

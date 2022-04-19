@@ -65,7 +65,12 @@ class EmployeeAdminApiController extends AdminBaseController
         try {
             $employee = $this->employeeRepo->findEmployeeById($id);
             if ($employee){
-                $data = ['employee' => $employee];
+                $em = new EmployeeRepository($employee);
+                $data = [
+                    'employee' => $employee,
+                    'payrolls' => $em->findPayrolls(),
+                    'complaints' => $em->findComplaints(),
+                    'leaves' => $em->findLeaves()];
                 return $this->success($data);
             }else{
                 return $this->notFound('Not Found');
