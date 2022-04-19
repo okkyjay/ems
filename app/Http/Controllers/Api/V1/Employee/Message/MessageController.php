@@ -73,7 +73,9 @@ class MessageController extends EmployeeBaseController
 
             $messageId = $request->input('message_id');
 
-            $conversations = MessageConversation::query()->where('message_id', $messageId);
+            $conversations = MessageConversation::query()->with([
+                'message', 'sender'
+            ])->where('message_id', $messageId);
             $total = $conversations->count()??0;
             if ($total > 0){
                 $conversations = $conversations->limit($limit)->offset($offset)
@@ -125,7 +127,7 @@ class MessageController extends EmployeeBaseController
                     $this->storeMediaFiles($conversation, $attachment, 'attachment');
                 }
                 return $this->success([
-                    'conversation' => $conversation
+                    'conversation' => $conversation->load('sender','message')
                 ]);
             }
         }catch (\Exception $exception){

@@ -3,6 +3,8 @@
 namespace App\EMS\MessageConversation;
 
 
+use App\EMS\Employee\Employee;
+use App\EMS\Message\Message;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
@@ -45,6 +47,16 @@ class MessageConversation extends Model implements HasMedia
             $file->url = $file->getUrl();
         }
         return $file;
+    }
+
+    public function sender()
+    {
+        return $this->belongsTo(Employee::class, 'chat_employee_id');
+    }
+
+    public function message()
+    {
+        return $this->belongsTo(Message::class, 'message_id');
     }
 
     protected $dates = [

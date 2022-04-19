@@ -4,6 +4,7 @@ namespace App\EMS\Complaint;
 
 
 use App\EMS\Employee\Employee;
+use App\Observers\ComplaintActionObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
@@ -63,5 +64,11 @@ class Complaint extends Model implements HasMedia
     public function employee()
     {
         return $this->belongsTo(Employee::class, 'employee_id');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        Complaint::observe(new ComplaintActionObserver());
     }
 }
