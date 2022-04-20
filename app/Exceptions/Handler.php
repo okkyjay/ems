@@ -3,7 +3,9 @@
 namespace App\Exceptions;
 
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -46,6 +48,26 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            $response = [
+                'status' => false,
+                'code' => 404,
+                'message' => "Request Not found",
+                'data' => []
+            ];
+            return response()->json($response, 404);
+        });
+
+        $this->renderable(function (QueryException $e, $request) {
+            $response = [
+                'status' => false,
+                'code' => 404,
+                'message' => "Unknown failure, try again",
+                'data' => []
+            ];
+            return response()->json($response, 404);
         });
     }
     /**

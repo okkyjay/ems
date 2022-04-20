@@ -53,7 +53,7 @@ class BaseController extends Controller
             'data' => $data
         ];
 
-        return response()->json($response);
+        return response()->json($response, 200);
     }
 
     public function storeMediaFiles($model, $filename, $keyName)

@@ -5,6 +5,7 @@ namespace App\EMS\Leave;
 
 use App\EMS\Employee\Employee;
 use App\EMS\LeaveType\LeaveType;
+use App\Observers\LeaveActionObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
@@ -72,5 +73,11 @@ class Leave extends Model implements HasMedia
     public function leaveType()
     {
         return $this->belongsTo(LeaveType::class, 'leave_type_id');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        Leave::observe(new LeaveActionObserver());
     }
 }
