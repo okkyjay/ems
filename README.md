@@ -22,6 +22,6 @@ Write	a	process	that	imports	the	contents	of	a	JSON-file	cleanly	and	consistentl
 - At the root level of the project files, run `composer install` to install the project dependencies
 - At the root level of the project files, run `cp .env.example .env` to create env file
 - At the root level of the project files, run `php artisan key:generate` to generate application key
-- At the root level of the project files, run `php artisan migrate` to migrate the database tables
+- At the root level of the project files, run `php artisan migrate --seed` to migrate the database tables
 - At the root level of the project files, run `php artisan serve` to serve the project
 - Application will run on http://localhost:8080 
