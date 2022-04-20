@@ -24,5 +24,4 @@ Write	a	process	that	imports	the	contents	of	a	JSON-file	cleanly	and	consistentl
 - At the root level of the project files, run `php artisan key:generate` to generate application key
 - At the root level of the project files, run `php artisan migrate` to migrate the database tables
 - At the root level of the project files, run `php artisan serve` to serve the project
-- At the root level of the project files, run `php artisan queue:work` 
 - Application will run on http://localhost:8080 
